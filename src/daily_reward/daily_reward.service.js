@@ -54,7 +54,47 @@ const getHistoryByUserId = async (userId) => {
     throw error;
   }
 }
+
+const getCooldownStatus = async (userId) => {
+  try {
+    if (!userId) {
+      throw new Error("userId es requerido");
+    }
+    
+    const redisKey = `daily:cooldown:user:${userId}`;
+    const exists = await redisClient.exists(redisKey);
+    
+    if (!exists) {
+      return {
+        can_claim: true,
+        cooldown_active: false,
+        message: "Puedes reclamar tu recompensa diaria"
+      };
+    }
+    
+    const ttl = await redisClient.ttl(redisKey);
+    const hours = Math.floor(ttl / 3600);
+    const minutes = Math.floor((ttl % 3600) / 60);
+    const seconds = ttl % 60;
+    
+    return {
+      can_claim: false,
+      cooldown_active: true,
+      retry_in_seconds: ttl,
+      time_remaining: {
+        hours,
+        minutes,
+        seconds
+      },
+      message: `Debes esperar ${hours}h ${minutes}m ${seconds}s para reclamar tu próxima recompensa`
+    };
+  } catch (error) {
+    throw new Error(`Error al verificar el cooldown: ${error.message}`);
+  }
+}
+
 export default {
   grantDailyReward,
-  getHistoryByUserId
+  getHistoryByUserId,
+  getCooldownStatus
 }

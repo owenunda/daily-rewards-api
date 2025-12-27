@@ -19,7 +19,19 @@ const getHistoryByUserId = async (req, res, next) => {
     res.status(500).json({ error: error.message });
   }
 }
+
+const getCooldownStatus = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const cooldownStatus = await dailyRewardService.getCooldownStatus(userId);
+    res.status(200).json(cooldownStatus);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 export default {
   grantDailyReward,
-  getHistoryByUserId
+  getHistoryByUserId,
+  getCooldownStatus
 }

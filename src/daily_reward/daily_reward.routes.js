@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.post('/daily', authMiddleware(), dailyRewardController.grantDailyReward);
 router.get('/daily/history', authMiddleware(), dailyRewardController.getHistoryByUserId);
+router.get('/cooldown', authMiddleware(), dailyRewardController.getCooldownStatus);
 
 export default router;
