@@ -2,8 +2,20 @@ import express from 'express'
 import envConfig from './src/config/envConfig.js'
 import redisClient from './src/redis/redis.client.js'
 import routes from './src/routes/routes.js'
+import cors from 'cors'
+
 const app = express()
 const port = 3000
+
+const allowedOrigins = '*'; // Puedes ajustar esto a tus necesidades
+
+const corsOptions = {
+  origin: allowedOrigins,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 
 app.use(express.json());
 
