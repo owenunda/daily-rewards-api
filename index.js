@@ -35,8 +35,9 @@ app.get('/redis-test', async (req, res) => {
 })
 
 app.use('/api/rewards', routes.dailyRoutes);
-
 app.use('/api/auth', routes.authRoutes);
+app.use('/api/user', routes.userRoutes);
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
