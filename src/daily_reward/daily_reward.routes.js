@@ -1,8 +1,9 @@
 import dailyRewardController from "./daily_reward.controller.js";
 import express from "express";
+import authMiddleware from "../middleware/auth.middleware.js";
 const router = express.Router();
 
-router.post('/daily', dailyRewardController.grantDailyReward);
+router.post('/daily', authMiddleware(), dailyRewardController.grantDailyReward);
 
 
 export default router;

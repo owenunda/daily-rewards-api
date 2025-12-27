@@ -2,7 +2,6 @@ import pool from "../config/db.js";
 
 const createUser = async (email, passwordHash) => {
   try {
-    console.log(passwordHash)
     const res = await pool.query(`
       INSERT INTO users (email, password_hash)
       VALUES ($1, $2)
