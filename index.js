@@ -1,14 +1,14 @@
 import express from 'express'
 import envConfig from './src/config/envConfig.js'
 import redisClient from './src/redis/redis.client.js'
-
+import authRoutes from './src/auth/auth.routes.js'
 
 const app = express()
 const port = 3000
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/hello-world', (req, res) => {
   res.send('Hello World!')
 })
 
@@ -53,6 +53,8 @@ app.post('/rewards/daily', async (req, res) => {
   });
 
 })
+
+app.use('/auth', authRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
