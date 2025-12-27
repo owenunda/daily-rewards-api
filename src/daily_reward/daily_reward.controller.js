@@ -10,7 +10,16 @@ const grantDailyReward = async (req, res, next) => {
   }
 }
 
-
+const getHistoryByUserId = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const history = await dailyRewardService.getHistoryByUserId(userId);
+    res.status(200).json(history);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 export default {
-  grantDailyReward
+  grantDailyReward,
+  getHistoryByUserId
 }

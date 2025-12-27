@@ -47,6 +47,14 @@ const grantDailyReward = async (userId) => {
   }
 }
 
+const getHistoryByUserId = async (userId) => {
+  try {
+    return await dailyRewardRepository.getHistoryByUserId(userId);
+  } catch (error) {
+    throw error;
+  }
+}
 export default {
-  grantDailyReward
+  grantDailyReward,
+  getHistoryByUserId
 }

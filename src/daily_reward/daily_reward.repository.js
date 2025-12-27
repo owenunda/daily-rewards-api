@@ -23,7 +23,19 @@ const addPointsToUser = async (userId, points) => {
     throw new Error(`Error al agregar puntos al usuario: ${error.message}`);
   }
 }
+
+const getHistoryByUserId = async (userId) => {
+  try {
+    const query = 'SELECT * FROM daily_rewards WHERE user_id = $1 ORDER BY claimed_at DESC';
+    const values = [userId];
+    const result = await pool.query(query, values);
+    return result.rows;
+  } catch (error) {
+    throw new Error(`Error retrieving reward history: ${error.message}`);
+  }
+}
 export default {
   rewardRecord,
-  addPointsToUser
+  addPointsToUser,
+  getHistoryByUserId
 }

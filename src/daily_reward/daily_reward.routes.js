@@ -4,6 +4,6 @@ import authMiddleware from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 router.post('/daily', authMiddleware(), dailyRewardController.grantDailyReward);
-
+router.get('/daily/history', authMiddleware(), dailyRewardController.getHistoryByUserId);
 
 export default router;
