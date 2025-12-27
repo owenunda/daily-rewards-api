@@ -33,6 +33,10 @@ const grantDailyReward = async (userId) => {
       claimed_at: new Date(),
     }
     await dailyRewardRepository.rewardRecord(rewardRecord.user_id, rewardRecord.reward_amount, rewardRecord.claimed_at);
+    
+    // agregamos los puntos al usuario
+    await dailyRewardRepository.addPointsToUser(userId, 100);
+    
     return {
       success: true,
       reward: 100,

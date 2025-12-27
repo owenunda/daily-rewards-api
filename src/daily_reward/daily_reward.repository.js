@@ -1,4 +1,4 @@
-import pool  from '../config/db.js';
+import pool from '../config/db.js';
 
 const rewardRecord = async (userId, rewardAmount, claimed_at) => {
   try {
@@ -11,6 +11,19 @@ const rewardRecord = async (userId, rewardAmount, claimed_at) => {
     throw new Error(`Error al guardar el registro de recompensa diaria: ${error.message}`);
   }
 }
+
+const addPointsToUser = async (userId, points) => {
+  try {
+    const { rows } = await pool.query(
+      'UPDATE users SET reward_points = reward_points + $1 WHERE id = $2 RETURNING *',
+      [points, userId]
+    );
+    return rows[0];
+  } catch (error) {
+    throw new Error(`Error al agregar puntos al usuario: ${error.message}`);
+  }
+}
 export default {
-  rewardRecord
+  rewardRecord,
+  addPointsToUser
 }
