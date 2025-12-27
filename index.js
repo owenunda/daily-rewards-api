@@ -24,7 +24,7 @@ app.get('/redis-test', async (req, res) => {
 })
 
 app.post('/rewards/daily', async (req, res) => {
-  const userId = 124; // luego vendrá del JWT
+  const userId = 127; // luego vendrá del JWT
   // clave única por usuario
   const redisKey = `daily:cooldown:user:${userId}`;
 
