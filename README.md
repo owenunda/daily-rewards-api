@@ -4,6 +4,21 @@ Backend API para gestionar recompensas diarias de usuarios, utilizando Redis par
 
 Este proyecto demuestra el uso correcto de Redis como sistema de estado temporal y PostgreSQL como fuente de verdad para datos críticos.
 
+## 📚 Documentación API
+
+La API está completamente documentada con **Swagger/OpenAPI 3.0**. Una vez iniciado el servidor, puedes acceder a la documentación interactiva en:
+
+```
+http://localhost:3000/api-docs
+```
+
+La documentación incluye:
+- Descripción detallada de todos los endpoints
+- Esquemas de solicitud y respuesta
+- Ejemplos de uso para cada endpoint
+- Pruebas interactivas (Try it out)
+- Autenticación JWT integrada
+
 ---
 
 ## Características
@@ -40,6 +55,7 @@ PostgreSQL (usuarios / puntos / historial)
 - JWT (autenticación)
 - bcryptjs (hash de contraseñas)
 - CORS (Cross-Origin Resource Sharing)
+- Swagger/OpenAPI 3.0 (documentación API)
 
 ---
 
@@ -113,6 +129,16 @@ npm run dev
 ```
 
 El servidor estará disponible en `http://localhost:3000`
+
+6. Acceder a la documentación API
+
+Abre tu navegador y visita:
+
+```
+http://localhost:3000/api-docs
+```
+
+Aquí encontrarás toda la documentación interactiva de Swagger con ejemplos y posibilidad de probar los endpoints.
 
 ---
 
@@ -212,6 +238,8 @@ return {
 ---
 
 ## Endpoints principales
+
+> **Nota:** Para una documentación completa e interactiva de todos los endpoints, visita `http://localhost:3000/api-docs` después de iniciar el servidor.
 
 ### Autenticación
 

@@ -3,6 +3,7 @@ import envConfig from './src/config/envConfig.js'
 import redisClient from './src/redis/redis.client.js'
 import routes from './src/routes/routes.js'
 import cors from 'cors'
+import { swaggerUi, swaggerSpec } from './src/config/swagger.js'
 
 const app = express()
 const port = 3000
@@ -18,6 +19,12 @@ app.use(cors(corsOptions));
 
 
 app.use(express.json());
+
+// Swagger Documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'Daily Rewards API Documentation',
+}));
 
 app.get('/hello-world', (req, res) => {
   res.send('Hello World!')
