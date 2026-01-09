@@ -34,6 +34,18 @@ const getHistoryByUserId = async (userId) => {
     throw new Error(`Error retrieving reward history: ${error.message}`);
   }
 }
+
+const resetPointsToUser = async (userId) => {
+  try {
+    const { rows} = await pool.query(
+      'UPDATE users SET reward_points = 0 WHERE id = $1 RETURNING *',
+      [userId]
+    );
+    return rows[0]; 
+  } catch (error) {
+    throw new Error(`Error al reiniciar los puntos del usuario: ${error.message}`);
+  }
+}
 export default {
   rewardRecord,
   addPointsToUser,
